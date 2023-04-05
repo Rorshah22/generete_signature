@@ -15,7 +15,7 @@ endif;
           integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <title>Document</title>
 </head>
-<body class="container-sm">
+<body class="container-sm" style="max-width: 600px">
 <header>
     <a class="m-5" href="https://github.com/Rorshah22/generete_signature">Исходный код</a>
 </header>
