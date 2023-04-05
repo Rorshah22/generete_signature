@@ -29,7 +29,6 @@ endif;
                type="text"
                name="name[]"
                id="surname"
-               value="<?= $_POST['surname'] ?? '' ?>"
                pattern="[A-Za-zА-Яа-яЁё]{1,32}"
                placeholder="Иванов"
                required>
@@ -40,7 +39,6 @@ endif;
                type="text"
                name="name[]"
                id="first_name"
-               value="<?= $_POST['first_name'] ?? '' ?>"
                pattern="[A-Za-zА-Яа-яЁё]{1,32}"
                placeholder="Иван"
                required>
@@ -52,7 +50,6 @@ endif;
                type="text"
                name="name[]"
                id="last_name"
-               value="<?= $_POST['last_name'] ?? '' ?>"
                pattern="[A-Za-zА-Яа-яЁё]{1,32}"
                placeholder="Иванович"
         >
@@ -63,8 +60,7 @@ endif;
                type="tel"
                name="phones[]"
                id="phone"
-               value="<?= $_POST['phone'][0] ?? '' ?>"
-               pattern="[0-9]{12}"
+               pattern="+[0-9]{12}"
                placeholder="375293332211"
                title="375293332211"
                required>
@@ -72,8 +68,7 @@ endif;
                type="tel"
                name="phones[]"
                id="phone2"
-               value="<?= $_POST['phone'][1] ?? '' ?>"
-               pattern="[0-9]{12}"
+               pattern="+[0-9]{12}"
                title="375293332211"
                placeholder="375293332211">
     </div>
@@ -83,7 +78,6 @@ endif;
                type="email"
                name="emails[]"
                id="email"
-               value="<?= $_POST['email'][0] ?? '' ?>"
                pattern="[A-za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                placeholder='mail@mail.com'
                title="mail@mail.com"
@@ -92,7 +86,6 @@ endif;
                type="email"
                name="emails[]"
                id="email2"
-               value="<?= $_POST['email'][1] ?? '' ?>"
                pattern="[A-za-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                title="mail@mail.com"
                placeholder='mail@mail.com'>

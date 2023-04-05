@@ -33,6 +33,7 @@ class SignatureData
             if ($phone === '') {
                 continue;
             }
+            $phone = str_replace('+', '', $phone);
             if (!preg_match('/^\d+$/', $phone)) {
                 throw new InvalidArgument('Номер должен содержать только цифры');
             }
