@@ -1,7 +1,7 @@
 <?php
 if (!empty($error)): ?>
     <p class="alert alert-warning"><?= $error ?></p>
-    <?php return;
+    <?php die();
 endif;
 ?>
 <!doctype html>
@@ -17,10 +17,11 @@ endif;
 </head>
 <body class="container-sm">
 <header>
-    <a class="m-5" href="https://github.com/Rorshah22/generatehtml">Исходный код</a>
+    <a class="m-5" href="https://github.com/Rorshah22/generete_signature">Исходный код</a>
 </header>
 
 <form id="form" class="mt-3  p-5" action="/" method="post">
+
     <span id="error"></span>
     <div class="mb-3">
         <label class="form-label" for="surname">Фамилия:</label>
@@ -109,7 +110,7 @@ endif;
 
     const viewDataBtn = document.getElementById('view-data-btn');
     const download = document.createElement('a');
-    const input = document.getElementById('link')
+    const input = document.getElementById('link');
     const form = document.getElementById('form');
 
     function getValue() {
@@ -137,10 +138,11 @@ endif;
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
-        download.classList.add('btn')
-        download.classList.add('btn-success')
-        download.innerText = 'Скачать'
-        download.href = "download.php"
+        download.classList.add('btn');
+        download.classList.add('btn-success');
+        download.innerText = 'Скачать';
+        download.href = "download.php";
+
 
         if (validate() === false) {
             return;
@@ -153,39 +155,53 @@ endif;
         }).then(response => {
             if (response.status === 200) {
                 input.appendChild(download);
+                download.setAttribute("data-down", 1);
             }
-            if (response.status === 201){
-                return response.text()
+            if (response.status === 400) {
+                return response.text();
             }
         }).then((text) => {
             if (text) {
                 document.getElementById('error').innerHTML = text;
+            }else{
+                document.getElementById('error').innerHTML = '';
             }
         });
+
+
     })
 
+    document.getElementById('link').addEventListener('click', e =>{
+            if (e.target.dataset.down == 1 ){
+                form.reset()
+                e.target.remove()
+            }
+    })
     viewDataBtn.addEventListener('click', () => {
-        getValue()
+        getValue();
         if (validate() === false) {
             return;
         }
 
-        const data = new FormData(form)
-        data.append('preview', true)
+        const data = new FormData(form);
+        data.append('preview', true);
         let popupContent = '';
         fetch("/", {
             method: "POST",
             body: data
         }).then(response => {
             if (response.status === 200) {
-                return response.text()
+                return response.text();
             }
-            if (response.status === 201){
-                return response.text()
+            if (response.status === 400) {
+                return response.text();
             }
         }).then((text) => {
             popupContent = text;
             const popup = window.open('', 'popup', 'width=400,height=400');
+            popup.document.open();
+            popup.document.write('');
+            popup.document.close();
             popup.document.write(popupContent);
         });
     });

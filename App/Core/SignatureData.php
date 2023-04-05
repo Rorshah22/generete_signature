@@ -10,6 +10,9 @@ class SignatureData
     public array $emails;
     public array $fullName;
 
+    /**
+     * @throws InvalidArgument
+     */
     public function __construct(array $postData)
     {
         extract($postData);
@@ -30,10 +33,10 @@ class SignatureData
             if ($phone === '') {
                 continue;
             }
-            if (!preg_match('/(\d+)/', $phone)) {
-                throw new InvalidArgument('Номер должен содеражать только цифры');
+            if (!preg_match('/^\d+$/', $phone)) {
+                throw new InvalidArgument('Номер должен содержать только цифры');
             }
-            if (!preg_match('/(\d+){12}/', $phone)) {
+            if (!preg_match('/^\d{12}$/', $phone)) {
                 throw new InvalidArgument('Не верное количество цифр должно быть 12 введено ' . strlen($phone));
             }
         }
@@ -73,5 +76,4 @@ class SignatureData
             mb_convert_case($firstName, MB_CASE_TITLE, "UTF-8") .
             mb_convert_case($lastName, MB_CASE_TITLE, "UTF-8");
     }
-
 }

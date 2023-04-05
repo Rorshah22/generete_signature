@@ -6,7 +6,7 @@ use App\Core\SignatureGenerator;
 use App\View\View;
 
 spl_autoload_register(function (string $className) {
-    require __DIR__ . '/../' . str_replace('\\', '/', $className) . '.php';
+    require_once __DIR__ . '/../' . str_replace('\\', '/', $className) . '.php';
 });
 $view = new View();
 try {
@@ -22,6 +22,6 @@ try {
     }
     $view->renderHtml();
 } catch (InvalidArgument $e) {
-    $view->renderHtml(['error' => $e->getMessage()],201);
+    $view->renderHtml(['error' => $e->getMessage()],400);
     return;
 }
